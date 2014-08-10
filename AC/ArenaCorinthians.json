@@ -4,39 +4,39 @@
         "placar": "2 x 0",
         "adversario": "Palmeiras",
         "torneio": "Brasileirão",
-        "renda": "2206184.00",
-        "publico": "31031"
+        "renda": 2206184.00,
+        "publico": 31031
     },
     {
         "data": "23/07/2014",
         "placar": "3 x 0",
         "adversario": "Bahia",
         "torneio": "Copa do Brasil",
-        "renda": "1389973.50",
-        "publico": "24452"
+        "renda": 1389973.50,
+        "publico": 24452
     },
     {
         "data": "17/07/2014",
         "placar": "2 x 1",
         "adversario": "Internacional",
         "torneio": "Brasileirão",
-        "renda": "2556385.50",
-        "publico": "32817"
+        "renda": 2556385.50,
+        "publico": 32817
     },
     {
         "data": "01/06/2014",
         "placar": "1 x 1",
         "adversario": "Botafogo",
         "torneio": "Brasileirão",
-        "renda": "2616819.50",
-        "publico": "37119"
+        "renda": 2616819.50,
+        "publico": 37119
     },
     {
         "data": "18/05/2014",
         "placar": "0 x 1",
         "adversario": "Figueirense",
         "torneio": "Brasileirão",
-        "renda": "3029801.70",
-        "publico": "36694"
+        "renda": 3029801.70,
+        "publico": 36694
     }
 ]
