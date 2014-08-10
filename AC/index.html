@@ -6,18 +6,11 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"></link>
   </head>
   <body>
-    <header id="top" class="navbar navbar-static-top">
-      <div class="container">
-        <div class="navbar-header">
-          <a class="navbar-brand" href="">Arena Corinthians</a>
-        </div>
-      </div>
-    </header>
     <div class="container">
       <div class="row">
-        <h2>Placar, público e renda na casa do campeão dos campeões.</h2>
+        <h2>Placar, público e renda na Arena Corinthians, a casa do campeão dos campeões.</h2>
         <div class="table-responsive">
-        <table id="jogos" class="table table-striped table-hover table-condensed">
+        <table class="table table-striped table-hover table-condensed">
           <thead>
            <tr>
              <th>Data</th>
@@ -29,6 +22,10 @@
              <th>Ticket médio (R$)</th>
            </tr>
           </thead>
+          <tfoot id="totais">
+          </tfoot>
+          <tbody id="jogos">
+          </tbody>
         </table>
         </div>
       </div>
@@ -43,24 +40,37 @@ $.ajax({
   dataType: 'json',
   success: function(data)
   {
+    var renda = 0, publico = 0;
     for (var i = 0; i < data.length; i++) {
       drawRow(data[i]);
+      renda += +data[i].renda;
+      publico += +data[i].publico;
     }
+    drawTotal(renda, publico);
   }
 });
+function drawTotal(renda, publico) {
+    var total = $("<tr />");
+    $("#totais").append(total);
+    total.append($("<td colspan=4></td>"));
+    total.append($("<td>" + formatNumber(renda, 2) + "</td>"));
+    total.append($("<td>" + formatNumber(publico) + "</td>"));
+    total.append($("<td>" + formatNumber(renda/publico, 2) + "</td>"));
+
+}
 function drawRow(rowData) {
-  var row = $("<tr />")
+  var row = $("<tr />");
   $("#jogos").append(row);
   row.append($("<td>" + rowData.data + "</td>"));
   row.append($("<td>" + rowData.placar + "</td>"));
   row.append($("<td>" + rowData.adversario + "</td>"));
   row.append($("<td>" + rowData.torneio + "</td>"));
-  row.append($("<td>" + formatMoney(rowData.renda) + "</td>"));
-  row.append($("<td>" + rowData.publico + "</td>"));
-  row.append($("<td>" + formatMoney(rowData.renda/rowData.publico) + "</td>"));
+  row.append($("<td>" + formatNumber(rowData.renda, 2) + "</td>"));
+  row.append($("<td>" + formatNumber(rowData.publico) + "</td>"));
+  row.append($("<td>" + formatNumber(rowData.renda/rowData.publico, 2) + "</td>"));
 }
-function formatMoney(n) {
-  var c = 2, d = ",", t = ".", 
+function formatNumber(n, c) {
+  var d = ",", t = ".", 
       s = n < 0 ? "-" : "", 
       i = parseInt(n = Math.abs(+n || 0).toFixed(c)) + "", 
       j = (j = i.length) > 3 ? j % 3 : 0;
