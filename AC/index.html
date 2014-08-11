@@ -45,7 +45,7 @@ function drawChart() {
   var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
   var formatter = new google.visualization.NumberFormat({ groupingSymbol: '.'});
   formatter.format(data, 1);
-  chart.draw(data, { legend: 'none'});
+  chart.draw(data, { legend: 'none', reverseCategories: true, orientation: 'horizontal'});
 }
 $.ajax({
   url: 'ArenaCorinthians.json',
