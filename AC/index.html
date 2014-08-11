@@ -42,9 +42,10 @@ google.setOnLoadCallback(drawChart);
 var dataChart = [];
 function drawChart() {
   var data = google.visualization.arrayToDataTable(dataChart);
-  var options = {legend: 'none'};
   var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
-  chart.draw(data, options);
+  var formatter = new google.visualization.NumberFormat({ groupingSymbol: '.'});
+  formatter.format(data, 1);
+  chart.draw(data, { legend: 'none'});
 }
 $.ajax({
   url: 'ArenaCorinthians.json',
@@ -52,7 +53,7 @@ $.ajax({
   success: function(data)
   {
     dataChart[0] =
-      ['Data', 'Publico',
+      [{ label: 'Data', type: 'string'}, { label: 'Publico', type: 'number'},
        { role: 'tooltip'}, { role: 'annotation'}, { role: 'style'}];
     var renda = 0, publico = 0;
     for (var i = 0; i < data.length; i++) {
@@ -82,8 +83,8 @@ function drawRow(rowData) {
   row.append($("<td>" + formatNumber(rowData.publico) + "</td>"));
   row.append($("<td>" + formatNumber(rowData.renda/rowData.publico, 2) + "</td>"));
   dataChart[dataChart.length] = 
-    [rowData.data, rowData.publico, 
-     "R$ " + formatNumber(rowData.renda, 2),
+    [rowData.data, rowData.publico,
+     formatNumber(rowData.publico) + " / R$ " + formatNumber(rowData.renda, 2),
      rowData.placar,
      'color: #e5e4e2'];
 }
